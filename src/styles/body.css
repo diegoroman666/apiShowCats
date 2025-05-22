@@ -1,22 +1,25 @@
 /* body.css */
 
+/* Fondo del cuerpo principal con padding estándar */
 .body-bg {
-  min-height: calc(100vh - 120px); /* Ajuste por header y footer */
+  min-height: 100vh;
   background-color: #D7D9CE;
-  padding: 20px;
+  padding: 1.25rem; /* equivalente a Bootstrap's p-4 */
 }
 
+/* Texto primario personalizado */
 .text-primary-custom {
   color: #119DA4;
 }
 
+/* Botón personalizado con clases compatibles con Bootstrap */
 .btn-primary-custom {
   background-color: #119DA4;
-  color: white;
+  color: #fff;
   border: none;
-  padding: 10px 20px;
-  border-radius: 8px;
-  font-size: 1rem;
+  padding: 0.625rem 1.25rem; /* Bootstrap equivalente: py-2 px-3 */
+  border-radius: 0.5rem; /* Bootstrap: rounded */
+  font-size: 1rem; /* Bootstrap default */
   transition: background-color 0.3s ease;
 }
 
@@ -24,11 +27,15 @@
   background-color: #0e7f88;
 }
 
+/* Imagen del gato: tamaño adaptable y responsive */
 .cat-img {
-  max-width: 600px;
-  width: 90%;
+  max-width: 80vw;
+  max-height: 80vh;
+  object-fit: contain;
 }
 
+
+/* Input con tamaño de fuente aumentado */
 input.form-control {
   font-size: 1.1rem;
 }
