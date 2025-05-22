@@ -1,0 +1,11 @@
+.text-generator-container {
+  margin-top: 2rem;
+  padding: 1rem;
+  border-top: 2px dashed #ccc;
+  width: 100%;
+  max-width: 500px;
+}
+
+.text-generator-container h2 {
+  margin-bottom: 1rem;
+}
