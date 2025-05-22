@@ -1,0 +1,19 @@
+/* Header.module.css */
+
+.navbarCustom {
+  background-color: #119DA4; /* color primario */
+}
+
+.navbarBrand {
+  font-weight: bold;
+  color: white;
+  text-transform: uppercase;
+}
+
+.navbarLink {
+  color: white;
+}
+
+.navbarLink:hover {
+  color: #D7D9CE; /* color claro */
+}
