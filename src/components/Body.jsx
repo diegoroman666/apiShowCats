@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import '../styles/body.css';
 
 function Body() {
   const [catImage, setCatImage] = useState('');
@@ -8,25 +7,6 @@ function Body() {
   const [customText, setCustomText] = useState('');
   const [imageReady, setImageReady] = useState(false);
 
-  // Obtener imagen aleatoria
-  const fetchCat = async () => {
-    setLoading(true);
-    setError('');
-    setImageReady(false);
-    try {
-      const timestamp = new Date().getTime();
-      const catUrl = `https://cataas.com/cat?timestamp=${timestamp}`;
-      setCatImage(catUrl);
-    } catch (err) {
-      console.error('Error al cargar el gato:', err);
-      setError('No se pudo cargar el gato. Intenta nuevamente.');
-    } finally {
-      setLoading(false);
-      setImageReady(true);
-    }
-  };
-
-  // Obtener imagen con texto
   const fetchCatWithText = async () => {
     if (!customText.trim()) return;
     setLoading(true);
@@ -45,7 +25,6 @@ function Body() {
     }
   };
 
-  // Descargar la imagen
   const downloadImage = async () => {
     try {
       const response = await fetch(catImage);
@@ -70,8 +49,11 @@ function Body() {
   };
 
   return (
-    <div className="container-fluid body-bg d-flex flex-column justify-content-center align-items-center text-center py-5">
-      <h1 className="display-5 mb-4 text-primary-custom">¡Mira este gato!</h1>
+    <div className="container-fluid min-vh-100 bg-light d-flex flex-column justify-content-center align-items-center text-center py-5 px-4">
+      <p className="lead text-primary fw-bold mb-4">
+        Esta aplicación te permite crear memes de gatos escribiendo un texto personalizado sobre una imagen aleatoria. <br />
+        ¡Escribe lo que quieras, genera tu meme gatuno y descárgalo para compartirlo con tus amigos! 🐱✨
+      </p>
 
       {loading && <p className="text-muted">Cargando gato...</p>}
       {error && <p className="text-danger">{error}</p>}
@@ -80,47 +62,38 @@ function Body() {
         <img
           src={catImage}
           alt="Gato generado"
-          className="img-fluid rounded shadow mb-4 cat-img"
+          className="img-fluid rounded shadow mb-4"
+          style={{ maxWidth: '80vw', maxHeight: '80vh', objectFit: 'contain' }}
         />
       )}
 
       {!imageReady && (
-        <>
-          <button
-            className="btn btn-primary-custom px-4 py-2 mb-3"
-            onClick={fetchCat}
+        <div className="w-50 d-flex flex-column align-items-center">
+          <input
+            type="text"
+            className="form-control form-control-lg mb-2"
+            placeholder="Agrega tu texto aquí"
+            value={customText}
+            onChange={(e) => setCustomText(e.target.value)}
+            maxLength={50}
             disabled={loading}
+          />
+          <button
+            className="btn btn-success btn-lg px-4 py-2 mb-2"
+            onClick={fetchCatWithText}
+            disabled={loading || !customText.trim()}
           >
-            {loading ? 'Cargando...' : 'Otro gato 🐾'}
+            Agregar texto
           </button>
-
-          <div className="w-50 d-flex flex-column align-items-center">
-            <input
-              type="text"
-              className="form-control mb-2"
-              placeholder="Agrega tu texto aquí"
-              value={customText}
-              onChange={(e) => setCustomText(e.target.value)}
-              maxLength={50}
-              disabled={loading}
-            />
-            <button
-              className="btn btn-success px-4 py-2 mb-2"
-              onClick={fetchCatWithText}
-              disabled={loading || !customText.trim()}
-            >
-              Agregar texto
-            </button>
-            <small className="form-text text-muted">
-              {customText.length}/50 caracteres
-            </small>
-          </div>
-        </>
+          <small className="form-text text-muted">
+            {customText.length}/50 caracteres
+          </small>
+        </div>
       )}
 
       {imageReady && !loading && (
         <button
-          className="btn btn-warning px-4 py-2"
+          className="btn btn-warning btn-lg px-4 py-2"
           onClick={downloadImage}
         >
           Descargar imagen 🖼️
